@@ -2,6 +2,7 @@ const express  = require("express");
 const exphbs   = require("express-handlebars");
 const session  = require("express-session");
 const mongoose = require("mongoose");
+const passport = require("passport");
 const flash    = require("connect-flash");
 const path     = require("path");
 const cookieParser     = require("cookie-parser");
@@ -12,6 +13,9 @@ mongoose.connect("mongodb://localhost:27017/nodeJS-ecommerece", { useNewUrlParse
 const app  = express();
 const port = (process.env.port || 5000);
 
+require("./login-strategies/localStrategy")(passport);
+
+const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
 app.set("views", path.join(__dirname, "views"));
@@ -30,6 +34,9 @@ app.use(session({
     resave: false
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash());
 
 app.use((req, res, next) => {
@@ -41,6 +48,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 app.use((req, res, next) => {

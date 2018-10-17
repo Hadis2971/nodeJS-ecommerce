@@ -2,6 +2,7 @@ const express  = require("express"),
       User     = require("../models/User"),
       bcrypt   = require("bcryptjs"),
       mongoose = require("mongoose"),
+      passport = require("passport");
       crypto   = require("crypto"),
       multer   = require("multer"),
       GridFsStorage = require("multer-gridfs-storage"),
@@ -45,11 +46,6 @@ router.get("/register", (req, res) => {
 router.get("/login", (req, res) => {
     res.render("auth/login");
 });
-
-router.get("/logout", (req, res) => {
-
-});
-
 
 router.post("/register", upload.single("profileImage"), (req, res) => {
     req.checkBody("name", "The Name Field is Required!!!").notEmpty();
@@ -100,6 +96,26 @@ router.post("/register", upload.single("profileImage"), (req, res) => {
             });
         });
     }
+});
+
+router.post("/login", (req, res, next) => {
+    passport.authenticate("local", (err, user) => {
+        if(err) {return err;}
+        if(!user) {return res.redirect("/users/login");}
+
+        req.logIn(user, (err) => {
+            if(err) throw err;
+            else{
+                return res.redirect("/");
+            }
+        });
+    })(req, res, next);
+});
+
+router.get("/logout", (req, res) => {
+    req.logout();
+    req.flash("success_msg", "You Have Successfully Logged Out");
+    res.redirect("/users/login");
 });
 
 module.exports = router;
