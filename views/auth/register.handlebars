@@ -10,6 +10,15 @@
 <body>
     <div class="row" id="box">
         <div class="col-md-7 mx-auto">
+            {{#each errors}}
+                <div class="alert alert-danger">{{msg}}</div>
+            {{/each}}
+            {{#if mail}}
+                <div class="alert alert-warning">That Email Address Has Already Been Taken</div>
+            {{/if}}
+            {{#if name}}
+                <div class="alert alert-warning">That Username Has Already Been Taken</div>
+            {{/if}}
             <div class="card card-body">
             <h1 class="text-center" style="color:#595959;">Sign Up</h1>    
                 <form method="POST" action="/users/register" enctype="multipart/form-data">

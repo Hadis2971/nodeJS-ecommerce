@@ -10,6 +10,9 @@
 <body>
     <div class="row" id="box">
         <div class="col-md-7 mx-auto">
+            {{#if success_msg}}
+                <div class="alert alert-success">{{success_msg}}</div>
+            {{/if}}
             <div class="card card-body">
             <h1 class="text-center" style="color:#595959;">Sign In</h1>    
                 <form method="POST" action="/users/login">
