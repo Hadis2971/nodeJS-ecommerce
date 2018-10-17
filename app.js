@@ -7,7 +7,7 @@ const path     = require("path");
 const cookieParser     = require("cookie-parser");
 const expressValidator = require("express-validator");
 
-mongoose.connect("mongodb://localhost:27017/nodeJS-ecommerece");
+mongoose.connect("mongodb://localhost:27017/nodeJS-ecommerece", { useNewUrlParser: true });
 
 const app  = express();
 const port = (process.env.port || 5000);
