@@ -6,8 +6,11 @@
   <div class="collapse navbar-collapse" id="collapse-content">
     {{#if user}}
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item mt-1">
+            <a class="nav-link fas fa-shopping-cart align-bottom"><span id="numOfItems">(0)</span></a>
+        </li>
         <li class="nav-item">
-            <a class="nav-link disabled" href="/users/logout">Logout</a>
+            <a class="nav-link" href="/users/logout">Logout</a>
         </li>
     </ul>
     {{else}}
