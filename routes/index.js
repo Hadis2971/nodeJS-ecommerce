@@ -5,6 +5,8 @@ const express    = require("express"),
       router     = express.Router();
 
 
+
+
 router.get("/allProducts", isLoggedIn, (req, res) => {
     Product.find({}, (err, products) => {
         if(err) throw err;
@@ -34,6 +36,7 @@ router.get("/ps4Games", isLoggedIn, (req, res) => {
 
 router.post("/myOrder", isLoggedIn, (req, res) => {
     console.log(req.body);
+    //res.render("ecommerce/myOrder", {order: req.body});
 });
 
 router.get("/", isLoggedIn, (req, res) => {
