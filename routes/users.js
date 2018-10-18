@@ -101,7 +101,10 @@ router.post("/register", upload.single("profileImage"), (req, res) => {
 router.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, user) => {
         if(err) {return err;}
-        if(!user) {return res.redirect("/users/login");}
+        if(!user) {
+            req.flash("error_msg", "Wrong Username or Password!!!");
+            return res.redirect("/users/login");
+        }
 
         req.logIn(user, (err) => {
             if(err) throw err;
