@@ -1,0 +1,21 @@
+.card{
+    display: inline-block;
+    width: 33%;
+    margin: 1%;
+    vertical-align: top;
+}
+
+@media only screen and (max-width: 900px){
+    .card{
+        width: 43%;
+        margin: 2%;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .card{
+        display: block;
+        width: 95%;
+        margin: 3%;
+    }
+}

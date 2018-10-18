@@ -16,7 +16,7 @@ const products = [
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique magna mauris, eu pharetra justo aliquet sed. Vestibulum convallis diam sit amet augue luctus ultricies. Cras sagittis volutpat nisi quis dignissim. Nunc blandit mi eget arcu dictum, ut euismod mi sodales. ",
         platform: "Ps4",
         price: 45,
-        coverImage: "/images/games/ps4/dark.png",
+        coverImage: "/images/games/ps4/dark.jpg",
     }),
     new Product({
         title: "Resident Evil VII",

@@ -14,6 +14,24 @@ router.get("/allProducts", isLoggedIn, (req, res) => {
     });
 });
 
+router.get("/pcGames", isLoggedIn, (req, res) => {
+    Product.find({platform: "PC"}, (err, products) => {
+        if(err) throw err;
+        else{
+            res.render("ecommerce/pcGames", {products: products}); 
+        }
+    });
+});
+
+router.get("/ps4Games", isLoggedIn, (req, res) => {
+    Product.find({platform: "Ps4"}, (err, products) => {
+        if(err) throw err;
+        else{
+            res.render("ecommerce/pcGames", {products: products}); 
+        }
+    });
+});
+
 router.get("/", isLoggedIn, (req, res) => {
     res.render("ecommerce/index");
 });
