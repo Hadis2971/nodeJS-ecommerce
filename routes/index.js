@@ -1,9 +1,18 @@
 const express    = require("express"),
+      Product    = require("../models/Product"),
       User       = require("../models/User");
       isLoggedIn = require("../helpers/isLoggedIn");  
       router     = express.Router();
 
 
+router.get("/allProducts", isLoggedIn, (req, res) => {
+    Product.find({}, (err, products) => {
+        if(err) throw err;
+        else{
+            res.render("ecommerce/allProducts", {products: products});
+        }
+    });
+});
 
 router.get("/", isLoggedIn, (req, res) => {
     res.render("ecommerce/index");
@@ -14,5 +23,7 @@ router.get("/:id", isLoggedIn, (req, res) => {
         res.render("ecommerce/index", {user: user});
     });
 });
+
+
 
 module.exports = router;

@@ -1,0 +1,6 @@
+.card{
+    display: inline-block;
+    width: 33%;
+    margin: 1%;
+    vertical-align: top;
+}

@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/allProducts.css" />
     <title>Express</title>
 </head>
 <body>
-    
+    <div class="row">
+        <div class="col-md-5">
+            {{> _linkList}}
+        </div>
+        <div class="col-md-7">
+        {{#each products}}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src={{this.coverImage}} alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.title}} {{thsi.platform}}</h5>
+                    <h5>Price: {{this.price}}</h5>
+                    <p class="card-text">{{this.description}}</p>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        {{/each}}
+        </div>
+    </div>
 </body>
 </html>
