@@ -32,6 +32,10 @@ router.get("/ps4Games", isLoggedIn, (req, res) => {
     });
 });
 
+router.post("/myOrder", isLoggedIn, (req, res) => {
+    console.log(req.body);
+});
+
 router.get("/", isLoggedIn, (req, res) => {
     res.render("ecommerce/index");
 });

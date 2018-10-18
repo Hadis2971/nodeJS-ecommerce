@@ -7,7 +7,10 @@
     {{#if user}}
     <ul class="navbar-nav ml-auto">
         <li class="nav-item mt-1">
-            <a class="nav-link fas fa-shopping-cart align-bottom"><span id="numOfItems">(0)</span></a>
+            <a class="nav-link fas fa-shopping-cart align-bottom">(<span id="numOfItems">0</span>)</a>
+        </li>
+        <li class="nav-item">
+            <a id="post-link" class="nav-link" href="/myOrder">My Order</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/users/logout">Logout</a>

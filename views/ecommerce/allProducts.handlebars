@@ -18,8 +18,8 @@
                 <img class="card-img-top" src={{this.coverImage}} alt="Card image cap">
                 <div class="card-body">
                     <h4 class="card-title">{{this.title}}</h4>
-                    <h5>Platform: {{this.platform}}</h5>
-                    <h5>Price: {{this.price}}</h5>
+                    <h5>Platform: <span class="platform">{{this.platform}}</span></h5>
+                    <h5>Price: <span class="price">{{this.price}}</span></h5>
                     <p class="card-text">{{this.description}}</p>
                     <a href="#" class="order-btn btn btn-primary">Add to Cart</a>
                 </div>
@@ -27,6 +27,6 @@
         {{/each}}
         </div>
     </div>
-    
+<script src="/Client/order.js"></script>      
 </body>
 </html>
