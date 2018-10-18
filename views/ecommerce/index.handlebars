@@ -7,6 +7,48 @@
     <title>Express</title>
 </head>
 <body>
-    <h1>Index Page</h1>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/users/images/{{user.profileImage}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Name: {{user.name}}</h5>
+                    <h5 class="card-title">Username: {{user.username}}</h5>
+                </div>
+            </div>
+            <div class="card mt-3" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="#">All Games</a></li>
+                    <li class="list-group-item"><a href="#">PC Games</a></li>
+                    <li class="list-group-item"><a href="#">Ps4 Games</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h1>Welcome To Game World</h1>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Etiam tristique magna mauris, eu pharetra justo aliquet sed. Vestibulum 
+            convallis diam sit amet augue luctus ultricies. Cras sagittis volutpat nisi 
+            quis dignissim. Nunc blandit mi eget arcu dictum, ut euismod mi sodales. 
+            Etiam lacinia porttitor pellentesque. Nunc congue dolor in maximus vulputate. 
+            Vivamus euismod, ante aliquet tempor gravida, mauris nibh tristique ante, ut 
+            pharetra arcu magna maximus tellus. Integer non laoreet arcu, a commodo ex. 
+            Curabitur vel nunc nec turpis iaculis ultrices. Nunc malesuada velit mauris, 
+            eget volutpat ante porttitor suscipit. Phasellus id velit ac sem aliquet interdum. 
+            Integer interdum euismod augue eget accumsan.
+
+            Vestibulum nec odio aliquet, volutpat urna sed, elementum velit. 
+            Pellentesque vestibulum porta turpis malesuada feugiat. Maecenas 
+            feugiat et nisl vitae venenatis. Aliquam et tellus vel orci placerat 
+            elementum id nec tellus. Mauris nec lectus dictum, mattis magna facilisis, 
+            tincidunt enim. Cras porta arcu eu neque mollis, a mattis mi egestas. 
+            Quisque vel est ligula. Cras vestibulum dui id viverra interdum. Fusce 
+            consectetur nunc dolor, eget consectetur ex consequat in. Morbi mollis 
+            metus non neque suscipit, ut dictum ante porta. Cras vehicula nisi sit 
+            amet imperdiet molestie.</p>
+        </div>
+    </div>
+    <hr>
+    <p class="text-center">H.M. &copy;</p>
 </body>
 </html>

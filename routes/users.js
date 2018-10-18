@@ -36,7 +36,7 @@ let gfs;
 var conn = mongoose.createConnection(mongoURI);
 conn.once('open', function () {
   gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection(mongoURI);  
+  gfs.collection("profileImages");  
 });
 
 router.get("/register", (req, res) => {
@@ -109,7 +109,7 @@ router.post("/login", (req, res, next) => {
         req.logIn(user, (err) => {
             if(err) throw err;
             else{
-                return res.redirect("/");
+                return res.redirect("/" + user._id);
             }
         });
     })(req, res, next);
@@ -119,6 +119,16 @@ router.get("/logout", (req, res) => {
     req.logout();
     req.flash("success_msg", "You Have Successfully Logged Out");
     res.redirect("/users/login");
+});
+
+router.get("/images/:filename", (req, res) => {
+    gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+        if(err) throw err;
+        else{
+            const readstream = gfs.createReadStream(file.filename);
+            readstream.pipe(res);
+        }
+    });
 });
 
 module.exports = router;

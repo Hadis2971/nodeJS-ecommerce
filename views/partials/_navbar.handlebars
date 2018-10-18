@@ -4,18 +4,21 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapse-content">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/users/register">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/users/login">Login</a>
-      </li>
-    </ul>
+    {{#if user}}
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
             <a class="nav-link disabled" href="/users/logout">Logout</a>
         </li>
     </ul>
+    {{else}}
+     <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/users/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/login">Login</a>
+        </li>
+    </ul>
+    {{/if}}    
   </div>
 </nav>
