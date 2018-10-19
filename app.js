@@ -62,4 +62,4 @@ app.use((err, req, res, next) => {
     res.render("errorViews/500", {layout: "errorLayout"});
 });
 
-app.listen(port, () => {`App Sarted On Port ${port}`});
+app.listen(port, () => {console.log(`App Sarted On Port ${port}`)});

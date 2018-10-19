@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/order.css" />
     <title>Express</title>
 </head>
 <body>
-    
+    {{#if userOrder}}
+        <div id="order-box">
+        <h2 class="text-center">Name: {{this.user.name}}</h2>    
+            {{#each userOrder.order}}
+                <div>
+                    <h5>Game: {{this.title}}</h5>
+                    <h5 Price: {{this.price}}></h5>
+                    <h5>Quantity: {{this.quantity}}</h5>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <h1 class="text-center display-4">No Items Selected</h1>
+    {{/if}}
 </body>
 </html>

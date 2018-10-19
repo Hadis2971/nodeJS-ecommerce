@@ -1,7 +1,8 @@
 const express    = require("express"),
       Product    = require("../models/Product"),
-      User       = require("../models/User");
-      isLoggedIn = require("../helpers/isLoggedIn");  
+      User       = require("../models/User"),
+      Order      = require("../models/Order"),
+      isLoggedIn = require("../helpers/isLoggedIn"),  
       router     = express.Router();
 
 
@@ -34,9 +35,45 @@ router.get("/ps4Games", isLoggedIn, (req, res) => {
     });
 });
 
+router.get("/myOrder", isLoggedIn, (req, res) => {
+    Order.find({userID: req.user._id}, (err, order) => {
+        if(err) throw err;
+        else{
+            if(!order.length){
+                res.render("ecommerce/myOrder");
+            }else{
+                const userOrder = {
+                    user: order[0].user,
+                    order: order[0].order
+                }
+                res.render("ecommerce/myOrder", {userOrder: userOrder});
+            }
+        }
+    });
+});
+
 router.post("/myOrder", isLoggedIn, (req, res) => {
-    console.log(req.body);
-    //res.render("ecommerce/myOrder", {order: req.body});
+    if(req.body === {}){
+        req.flash("info_msg", "You Have Made an Order");
+        res.redirect("/allProducts");
+    }else{
+        const newOrder = new Order({
+            userID: req.user._id,
+            user: {
+                name: req.user.name,
+                email: req.user.email
+            },
+            order: req.body
+        });
+        newOrder.save((err, order) => {
+            if(err) throw err;
+            else{
+                console.log(newOrder);
+                req.flash("success_msg", "You Have Made an Order");
+                res.redirect("/myOrder");
+            }
+        });
+    }
 });
 
 router.get("/", isLoggedIn, (req, res) => {
