@@ -10,7 +10,11 @@
     <div class="row">
         <div class="col-md-5">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="/users/images/{{user.profileImage}}" alt="Card image cap">
+                {{#if user.profileImage}}
+                    <img class="card-img-top" src="/users/images/{{user.profileImage}}" alt="Card image cap">
+                {{else}}
+                    <img class="card-img-top" src="/images/no-content.png" alt="Card image cap">
+                {{/if}}
                 <div class="card-body">
                     <h5 class="card-title">Name: {{user.name}}</h5>
                     <h5 class="card-title">Username: {{user.username}}</h5>
