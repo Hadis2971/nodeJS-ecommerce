@@ -10,6 +10,15 @@
     -webkit-animation: animatetop 0.5s ease-in-out;
 }
 
+.order-info{
+    border-bottom: 0.1em solid #eee;
+    margin-bottom: 3%;
+}
+
+.order-info > h5{
+    margin-bottom: 0.5em;
+}
+
 @keyframes animatetop{
     from{top: -700px; opacity: 0;}
     to{top: 0px; opacity: 1;}

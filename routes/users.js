@@ -69,13 +69,14 @@ router.post("/register", upload.single("profileImage"), (req, res) => {
                         name: name
                     });
                 }else{
+                    let image = req.file? req.file.filename : "";
                     const newUser = new User({
                         name: req.body.name,
                         username: req.body.username,
                         address: req.body.address,
                         email: req.body.email,
                         password: req.body.password,
-                        profileImage: req.file.filename
+                        profileImage: image
                     });
 
                     bcrypt.genSalt(10, (err, salt) => {

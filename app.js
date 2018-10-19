@@ -6,6 +6,7 @@ const passport = require("passport");
 const flash    = require("connect-flash");
 const path     = require("path");
 const cookieParser     = require("cookie-parser");
+const methodOverride   =  require("method-override");
 const expressValidator = require("express-validator");
 
 mongoose.connect("mongodb://localhost:27017/nodeJS-ecommerece", { useNewUrlParser: true });
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
+app.use(methodOverride("_method"));
 app.use(expressValidator());
 
 app.use(session({

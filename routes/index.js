@@ -42,10 +42,23 @@ router.get("/myOrder", isLoggedIn, (req, res) => {
             if(!order.length){
                 res.render("ecommerce/myOrder");
             }else{
+                
+                let userOrder = [];
+                for(let i = 0; i < order.length; i++){
+                    userOrder.push({
+                        id: order[i]._id,
+                        user: order[i].user,
+                        order: order[i].order
+                    });
+                }
+                /*
                 const userOrder = {
+                    id: order[0]._id,
                     user: order[0].user,
                     order: order[0].order
-                }
+                }*/
+                
+                
                 res.render("ecommerce/myOrder", {userOrder: userOrder});
             }
         }
@@ -61,6 +74,7 @@ router.post("/myOrder", isLoggedIn, (req, res) => {
             userID: req.user._id,
             user: {
                 name: req.user.name,
+                address: req.user.address,
                 email: req.user.email
             },
             order: req.body
@@ -68,12 +82,22 @@ router.post("/myOrder", isLoggedIn, (req, res) => {
         newOrder.save((err, order) => {
             if(err) throw err;
             else{
-                console.log(newOrder);
-                req.flash("success_msg", "You Have Made an Order");
                 res.redirect("/myOrder");
             }
         });
     }
+});
+
+router.delete("/removeOrder/:id", (req, res) => {
+    Order.findById(req.params.id, (err, order) => {
+        if(err) throw err;
+        else{
+            order.remove(() => {
+                req.flash("info_msg", "You Have Successfully Removed an Order");
+                res.redirect("/myOrder");
+            });
+        }
+    });
 });
 
 router.get("/", isLoggedIn, (req, res) => {
@@ -85,7 +109,5 @@ router.get("/:id", isLoggedIn, (req, res) => {
         res.render("ecommerce/index", {user: user});
     });
 });
-
-
 
 module.exports = router;
