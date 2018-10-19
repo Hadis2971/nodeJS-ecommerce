@@ -50,6 +50,7 @@ router.get("/login", (req, res) => {
 router.post("/register", upload.single("profileImage"), (req, res) => {
     req.checkBody("name", "The Name Field is Required!!!").notEmpty();
     req.checkBody("username", "The Username Field is Required!!!").notEmpty();
+    req.checkBody("address", "The Address Field is Required!!!").notEmpty();
     req.checkBody("email", "The Email Field is Required!!!").notEmpty();
     req.checkBody("password", "The Password Field is Required!!!").notEmpty();
     req.checkBody("email", "Please Enter a Valid Email Address!!!").isEmail();
@@ -71,6 +72,7 @@ router.post("/register", upload.single("profileImage"), (req, res) => {
                     const newUser = new User({
                         name: req.body.name,
                         username: req.body.username,
+                        address: req.body.address,
                         email: req.body.email,
                         password: req.body.password,
                         profileImage: req.file.filename

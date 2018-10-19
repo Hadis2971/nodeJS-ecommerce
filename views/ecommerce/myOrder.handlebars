@@ -10,6 +10,9 @@
 <body>
     {{#if userOrder}}
         <div id="order-box">
+        {{#if success_msg}}
+            <div class="alert alert-success">{{success_msg}}</div>
+        {{/if}}    
         <h2 class="text-center">Name: {{this.user.name}}</h2>    
             {{#each userOrder.order}}
                 <div>
