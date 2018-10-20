@@ -42,7 +42,9 @@ function orderBtnHandler(evt){
         }
     }else{
         appData.orders.push({title: title, platform: platform, price: price, quantity: 1});
-    }    
+    }
+    
+    window.FlashMessage.success('This is a successs flash message !');
 };
 
 for(let i = 0; i < orderBtns.length; i++){
