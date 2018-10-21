@@ -26,7 +26,7 @@
                 {{/this.order}}
                     <h5>Total Price: {{this.totalPrice}}$</h5>
                     <h5>Order Date: {{this.time}}</h5>   
-                    <form action="submitOrder" method="POST">
+                    <form action="/submitOrder" method="POST">
                         <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key="pk_test_WD4l7GFdKWiDO85KxNNIE2vQ"

@@ -94,21 +94,25 @@ router.post("/myOrder", isLoggedIn, (req, res) => {
 });
 
 router.post("/submitOrder", (req, res) => {
-    const token = request.body.stripeToken; 
-
+    const token = req.body.stripeToken; 
+    const chargeAmount = req.body.chargeForOrder;
     const charge = stripe.charges.create({
-    amount: req.body.chargeForOrder,
+    amount: chargeAmount,
     currency: 'usd',
     description: 'Example charge',
     source: token,
     }, function(err, charge){
-        if(err){
+        if(err && err.type === "StripeCardError"){
             console.log("Your Card Was Declined");
         }else{
             console.log("Success");
             res.redirect("/paySuccess");
         }
     });
+});
+
+router.get("/paySuccess", (req, res) => {
+    res.render("ecommerce/paySuccess");
 });
 
 router.delete("/removeOrder/:id", (req, res) => {
