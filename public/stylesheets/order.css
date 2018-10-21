@@ -1,7 +1,10 @@
 #order-box{
     position: relative;
-    width: 70%;
-    margin: 3% auto;
+    width: 45%;
+    height: 35em;
+    overflow-y: scroll;
+    display: inline-block;
+    margin: 2%;
     border: 0.03em solid #eee;
     box-sizing: border-box;
     padding: 3%;
@@ -27,4 +30,10 @@
 @-webkit-keyframes animatetop{
     from{top: -700px; opacity: 0;}
     to{top: 0px; opacity: 1;}
+}
+
+@media only screen and (max-width: 900px){
+    #order-box{
+        width: 90%;
+    }
 }

@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const Schema   = mongoose.Schema;
+const mongoose  = require("mongoose");
+const timeStamp = require("mongoose-timestamp");
+const Schema    = mongoose.Schema;
 
 const orderSchema = new Schema({
     userID: {
@@ -25,5 +26,6 @@ const orderSchema = new Schema({
         required: true
     }
 });
+orderSchema.plugin(timeStamp);
 
 const Order = module.exports = mongoose.model("Order", orderSchema);

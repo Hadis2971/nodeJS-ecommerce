@@ -1,4 +1,5 @@
 const express    = require("express"),
+      stripe     = require("stripe")("sk_test_LfjMRpelxPrAsDYkVm6PqqER"),
       Product    = require("../models/Product"),
       User       = require("../models/User"),
       Order      = require("../models/Order"),
@@ -42,22 +43,24 @@ router.get("/myOrder", isLoggedIn, (req, res) => {
             if(!order.length){
                 res.render("ecommerce/myOrder");
             }else{
-                
                 let userOrder = [];
                 for(let i = 0; i < order.length; i++){
                     userOrder.push({
                         id: order[i]._id,
                         user: order[i].user,
-                        order: order[i].order
-                    });
-                }
-                /*
-                const userOrder = {
-                    id: order[0]._id,
-                    user: order[0].user,
-                    order: order[0].order
-                }*/
-                
+                        price: order[i].order[i].price,
+                        order: order[i].order,
+                        
+                    });  
+                    let sumPrice = 0; 
+                    for(let i2 = 0; i2 < order[i].order.length; i2++){
+                        sumPrice += (order[i].order[i2].price * order[i].order[i2].quantity);
+                    }
+
+                    userOrder[i].totalPrice = sumPrice;
+                    let str = String(order[i].createdAt);
+                    userOrder[i].time = str.slice(0, str.indexOf("GMT"));
+                }              
                 
                 res.render("ecommerce/myOrder", {userOrder: userOrder});
             }
@@ -67,8 +70,8 @@ router.get("/myOrder", isLoggedIn, (req, res) => {
 
 router.post("/myOrder", isLoggedIn, (req, res) => {
     if(req.body === {}){
-        req.flash("info_msg", "You Have Made an Order");
-        res.redirect("/allProducts");
+        return;
+        //res.redirect("/allProducts");
     }else{
         const newOrder = new Order({
             userID: req.user._id,
@@ -82,10 +85,30 @@ router.post("/myOrder", isLoggedIn, (req, res) => {
         newOrder.save((err, order) => {
             if(err) throw err;
             else{
+                order.orderTime = order.createdAt;
+                //console.log(order);
                 res.redirect("/myOrder");
             }
         });
     }
+});
+
+router.post("/submitOrder", (req, res) => {
+    const token = request.body.stripeToken; 
+
+    const charge = stripe.charges.create({
+    amount: req.body.chargeForOrder,
+    currency: 'usd',
+    description: 'Example charge',
+    source: token,
+    }, function(err, charge){
+        if(err){
+            console.log("Your Card Was Declined");
+        }else{
+            console.log("Success");
+            res.redirect("/paySuccess");
+        }
+    });
 });
 
 router.delete("/removeOrder/:id", (req, res) => {

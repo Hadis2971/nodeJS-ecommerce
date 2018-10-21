@@ -44,7 +44,7 @@ function orderBtnHandler(evt){
         appData.orders.push({title: title, platform: platform, price: price, quantity: 1});
     }
     
-    window.FlashMessage.success('This is a successs flash message !');
+    window.FlashMessage.success(`Game ${title} Added To Shopping Cart`);
 };
 
 for(let i = 0; i < orderBtns.length; i++){

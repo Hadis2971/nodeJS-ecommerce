@@ -8,29 +8,45 @@
     <title>Express</title>
 </head>
 <body>
-    {{#if info_msg}}
+    <div style="width:95%;margin:auto;">
+        {{#if info_msg}}
             <div class="alert alert-info">{{info_msg}}</div>
-    {{/if}}  
-    {{#if userOrder.length}}
-        {{#each userOrder}}
-        <div id="order-box">
-        <h2 class="text-center mb-2">Name: {{this.user.name}}</h2>
-        <h2 class="text-center mb-3">Address: {{this.user.address}}</h2>      
-            {{#this.order}}
-                <div class="order-info">
-                    <h5>Game: {{this.title}}</h5>
-                    <h5 Price: {{this.price}}></h5>
-                    <h5>Quantity: {{this.quantity}}</h5>
-                </div>
-            {{/this.order}}      
-                <button type="button" class="btn btn-primary btn-block">Submit Order</button>
-                <form method="POST" action="/removeOrder/{{this.id}}?_method=DELETE" class="mt-3">
-                    <button type="submit" class="btn btn-danger btn-block">Cancel Order</button>
-                </form>
-       </div>
-       {{/each}}  
-    {{else}}
-        <h1 class="text-center display-4">No Items Selected</h1>
-    {{/if}}
+        {{/if}}  
+        {{#if userOrder.length}}
+            {{#each userOrder}}
+            <div id="order-box">
+            <h2 class="text-center mb-2">Name: {{this.user.name}}</h2>
+            <h2 class="text-center mb-3">Address: {{this.user.address}}</h2>      
+                {{#this.order}}
+                    <div class="order-info">
+                        <h5 style="font-weight:300;">Game: {{this.title}}</h5>
+                        <h5 style="font-weight:300;">Price: {{this.price}}$</h5>
+                        <h5 style="font-weight:300;">Quantity: {{this.quantity}}</h5>
+                    </div>
+                {{/this.order}}
+                    <h5>Total Price: {{this.totalPrice}}$</h5>
+                    <h5>Order Date: {{this.time}}</h5>   
+                    <form action="submitOrder" method="POST">
+                        <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_WD4l7GFdKWiDO85KxNNIE2vQ"
+                            data-amount="{{this.totalPrice}}"
+                            data-name="Stripe.com"
+                            data-description="Example charge"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto"
+                            data-zip-code="true">
+                        </script>
+                        <input type="hidden" name="chargeForOrder" value="{{this.totalPrice}}" />
+                    </form>
+                    <form method="POST" action="/removeOrder/{{this.id}}?_method=DELETE" class="mt-3">
+                        <button type="submit" class="btn btn-danger btn-block">Cancel Order</button>
+                    </form>
+        </div>
+        {{/each}}  
+        {{else}}
+            <h1 class="text-center display-4">No Items Selected</h1>
+        {{/if}}
+    </div>
 </body>
 </html>
